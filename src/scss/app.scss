@@ -34,7 +34,7 @@ body {
   &__items {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     grid-column-gap: 11px;
 
     @media (max-width: 1400px) {
@@ -42,7 +42,7 @@ body {
     }
 
     @media (max-width: 1160px) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(1, 1fr);
     }
 
     @media (max-width: 730px) {
@@ -57,15 +57,13 @@ body {
 
     @media (max-width: 1300px) {
       flex-direction: column-reverse;
-      
+
       .categories {
         margin-top: 30px;
         overflow: auto;
         max-width: 100%;
       }
     }
-
-    
   }
 }
 
