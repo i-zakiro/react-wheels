@@ -4,16 +4,19 @@ import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock';
 import Sort from '../components/Sort';
 import Skeleton from '../components/PizzaBlock/skeleton';
-import PaginatedItems from '../components/Paginate';
+import Pagination from '../components/Pagination';
+import { SearchContext } from '../App';
 
-const Home = ({ searchValue }) => {
+const Home = () => {
+  const { searchValue } = React.useContext(SearchContext);
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [categoryId, setCategoryId] = React.useState(0);
-  const [sortType, setSortType] = React.useState({ name: 'популярности', sortProperty: 'rating' });
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const [currentPage, setCurrentPage] = React.useState(1);
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  const [sortType, setSortType] = React.useState({
+    name: 'популярности',
+    sortProperty: 'rating',
+  });
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -24,7 +27,7 @@ const Home = ({ searchValue }) => {
     const search = searchValue ? `&search=${searchValue}` : '';
 
     fetch(
-      `https://62a43b1747e6e400638e8143.mockapi.io/items?${category}sortBy=${sortBy}&order=${order}${search}&limit=4&page=${currentPage}`,
+      `https://62a43b1747e6e400638e8143.mockapi.io/items?page=${currentPage}&limit=4&${category}sortBy=${sortBy}&order=${order}${search}`,
     )
       .then((res) => {
         return res.json();
@@ -40,7 +43,7 @@ const Home = ({ searchValue }) => {
 
   const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
 
-  const skeletons = [...new Array(6)].map((_, index) => {
+  const skeletons = [...new Array(4)].map((_, index) => {
     return <Skeleton key={index} />;
   });
   ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,14 +56,7 @@ const Home = ({ searchValue }) => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : pizzas}</div>
-      <PaginatedItems
-        itemsPerPage={4}
-        items={items}
-        onChangePage={(pageNum) => {
-          console.log(pageNum);
-          setCurrentPage(pageNum);
-        }}
-      />
+      <Pagination onChangePage={(number) => setCurrentPage(number)} />
     </div>
   );
 };
