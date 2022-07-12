@@ -8,6 +8,7 @@ import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
 import { useSelector, useDispatch } from 'react-redux'
 import { setCategoryId } from '../redux/slices/filterSlice'
+import axios from 'axios';
 
 
 const Home = () => {
@@ -30,17 +31,15 @@ const Home = () => {
     const category = categoryId > 0 ? `category=${categoryId}&` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    fetch(
+    axios.get(
       `https://62a43b1747e6e400638e8143.mockapi.io/items?page=${currentPage}&limit=4&${category}sortBy=${sortBy}&order=${order}${search}`,
     )
-      .then((res) => {
-        return res.json();
-      })
-      .then((arr) => {
-        setItems(arr);
+    .then((res) => {
+        setItems(res.data);
         setIsLoading(false);
-        window.scrollTo(0, 0);
       });
+
+      window.scrollTo(0, 0);
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
