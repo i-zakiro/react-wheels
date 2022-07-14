@@ -10,18 +10,6 @@ const Pagination = ({ currentPage, onChangePage }) => {
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = React.useState(0);
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  // React.useEffect(() => {
-  //   // Fetch items from another resources.
-  //   const endOffset = itemOffset + itemsPerPage;
-  //   console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  //   setCurrentItems(items.slice(itemOffset, endOffset));
-  //   setPageCount(Math.ceil(items.length / itemsPerPage));
-  // }, [itemOffset, itemsPerPage]);
-
   // Invoke when user click to request another page.
 
   return (
