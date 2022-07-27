@@ -11,7 +11,7 @@ const Search = () => {
 
   const onClickClear = () => {
     setSearchValue('');
-    setValue('')
+    setValue('');
     inputRef.current.focus();
   }
 
