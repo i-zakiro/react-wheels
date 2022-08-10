@@ -10,6 +10,7 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
     const typeNames = ['тонкое', 'традиционное'];
 
     //////////////////////////////////////////////////////////////////////////////////////////////
+
     const addedCount = cartItem ? cartItem.count : 0;
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,8 +22,8 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
         title,
         price,
         imageUrl,
-        type: activeType,
-        size: activeSize,
+        type: typeNames[activeType],
+        size: sizes[activeSize],
       };
 
       dispatch(addItem(item));
