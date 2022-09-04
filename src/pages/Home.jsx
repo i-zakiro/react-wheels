@@ -5,7 +5,6 @@ import PizzaBlock from '../components/PizzaBlock';
 import Sort from '../components/Sort';
 import Skeleton from '../components/PizzaBlock/skeleton';
 import Pagination from '../components/Pagination';
-import { SearchContext } from '../App';
 import { useSelector, useDispatch } from 'react-redux'
 import { selectFilter, setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice'
 import qs from 'qs';
@@ -20,9 +19,11 @@ const Home = () => {
   
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
-  const { categoryId, sort, currentPage } = useSelector(selectFilter)
-  const { searchValue } = React.useContext(SearchContext);
+  const { categoryId, sort, currentPage } = useSelector(selectFilter);
+  const searchValue = useSelector(state => state.filter.searchValue);
 
+  console.log(searchValue + ' HOMEseeeeeaaarch');
+  
   const getPizzas = async () => {
     const sortBy = sort.sortProperty.replace('-', '');
     const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
