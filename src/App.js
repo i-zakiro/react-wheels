@@ -5,7 +5,8 @@ import { Route, Routes } from 'react-router-dom';
 import Cart from './pages/Cart';
 import NotFound from './pages/NotFound';
 import './scss/app.scss';
-import Pizza from './pages/Pizza';
+import Pizza from './pages/FullPizza';
+import MainLayout from './layouts/MainLayout';
 
 
 
@@ -13,18 +14,14 @@ function App() {
   //const pathname = window.location.pathname;
   
   return (
-    <div className="wrapper">
-      <Header />
-      <div className="content">
-        {/* {pathname === '/' && <Home />} */}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/pizza/:id" element={<Pizza />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/pizza/:id" element={<Pizza />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
         </Routes>
-      </div>
-    </div>
   );
 }
 

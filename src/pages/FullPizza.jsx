@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Pizza = () => {
     const [pizza, setPizza] = React.useState(null);
-
+    
     const {id} = useParams();
+
+    const navigate = useNavigate();
 
     React.useEffect(() => {
         async function fetchPizza () {
@@ -13,14 +15,13 @@ const Pizza = () => {
                 const { data } = await axios.get("https://62a43b1747e6e400638e8143.mockapi.io/items/" + id);
                 setPizza(data);
             } catch (error) {
-                alert("error while fetching pizza!")
+                alert("error while fetching pizza!");
+                navigate('/');
             }
         }
 
         fetchPizza();
-    }, [])
-
-    console.log(id);
+    }, []);
 
     if (!pizza) {
         return "Loading...";
