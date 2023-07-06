@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 import styles from "./Pagination.module.scss";
 
 const Pagination = ({ currentPage, onChangePage }) => {
-  // We start with an empty list of itemss.
+  // We start with an empty list of items.
   const [currentItems, setCurrentItems] = React.useState(null);
   //const [pageCount, setPageCount] = React.useState(3);
   // Here we use item offsets; we could also use page offsets
